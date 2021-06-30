@@ -1,3 +1,7 @@
+*.DS_Store
+
+terraform/config_map_aws_auth.yml
+
 # Local .terraform directories
 **/.terraform/*
 
