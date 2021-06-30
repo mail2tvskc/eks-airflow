@@ -1,10 +1,10 @@
-# EKS Deployment Base
+# EKS Deployment
 
 This repo provides Terraform templates for deploying a Kubernetes cluster against AWS using EKS
 
 ## Requirements
 
-* Terraform / Ansible
+* Terraform
 * AWS CLI
 * Kubectl
 
@@ -57,7 +57,7 @@ aws eks update-kubeconfig --name sandbox-eks-cluster --region $AWS_DEFAULT_REGIO
 ```
 
 ### Airflow
-See [airflow/Readme.md](airflow/Readme.md) for information about how to install airflow in this cluster. 
+See [airflow/README.md](airflow/README.md) for information about how to install airflow in this cluster. 
 
 
 ## References: 
