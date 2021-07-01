@@ -127,6 +127,15 @@ List tables:
  \dt
 ```
 
+## Support Apache Livy Operator    
+
+Needs the folling dependency as described in the [doc](https://airflow.apache.org/docs/apache-airflow-providers-apache-livy/stable/index.html).        
+
+In order to support it, the image rootstrap/airflow:2.1.0 is created with the following [Dockerfile](https://github.com/rootstrap/eks-airflow/blob/main/airflow/docker/Dockerfile)      
+
+Notice that if you want to add more dependencies, just use that Dockerfile adding in the pip install the necessary dependencies. 
+
+Build and push the image and update the image version at [values.yaml](https://github.com/rootstrap/eks-airflow/blob/main/airflow/chart/values.yaml) file.    
 
 
 
