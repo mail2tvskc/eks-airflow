@@ -39,11 +39,16 @@ aws eks update-kubeconfig --name sandbox-eks-cluster --region $AWS_DEFAULT_REGIO
 ```
 	kubectl get nodes
 ```
-* Provide access to other IAM users/roles that require it (see https://aws.amazon.com/premiumsupport/knowledge-center/eks-api-server-unauthorized-error/)
+* Provide access to other IAM users/roles that require it (see https://aws.amazon.com/premiumsupport/knowledge-center/amazon-eks-cluster-access/)
 ```
 	kubectl edit configmap aws-auth -n kube-system
 ```
 (IAM users should authenticate to the cluster after this step is completed)
+
+```
+	aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name sandbox-eks-cluster
+```
+
 
 * NOTE: This template does not currently include an Ingress controller. One can be deployed, eg for Nginx, using
 ```

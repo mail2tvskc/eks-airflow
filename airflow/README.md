@@ -61,16 +61,26 @@ The following files has been modified:
 ```bash
   kubectl get all -n airflow 
 ```
-* Access Airflow console by port-forwarding
+* Access Airflow web by port-forwarding
 ```bash
   export POD_NAME=$(kubectl get pods --field-selector=status.phase=Running -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}' | grep 'web')
   kubectl port-forward --namespace airflow $POD_NAME 8080:8080
 ```
+Enter at Enter at [http://localhost:8080/](http://localhost:8080/)
+
 
 * Retrieve LB endpoint
 ```bash
   kubectl describe ingress airflow-airflow-ingress 
 ```
+
+* Access Flower web
+```bash
+  export POD_NAME=$(kubectl get pods --field-selector=status.phase=Running -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}' | grep 'flower')
+  kubectl port-forward --namespace airflow $POD_NAME 5555:5555
+```
+
+Enter at [http://localhost:5555/](http://localhost:5555/)
 
 * Create CNAME in Route53 console for LB:
 
@@ -91,6 +101,7 @@ The following files has been modified:
   airflow-webserver-59f7f57d74-8hb66   1/1     Running   0          11m
   airflow-worker-5845dc5799-df7g8      2/2     Running   0          11m
 ```
+
 * Web
 ```bash
   kubectl logs airflow-webserver-59f7f57d74-8hb66 
@@ -127,6 +138,15 @@ List tables:
  \dt
 ```
 
+## Support Apache Livy Operator    
+
+Needs the folling dependency as described in the [doc](https://airflow.apache.org/docs/apache-airflow-providers-apache-livy/stable/index.html).        
+
+In order to support it, the image rootstrap/airflow:2.1.0 is created with the following [Dockerfile](https://github.com/rootstrap/eks-airflow/blob/main/airflow/docker/Dockerfile)      
+
+Notice that if you want to add more dependencies, just use that Dockerfile adding in the pip install the necessary dependencies. 
+
+Build and push the image and update the image version at [values.yaml](https://github.com/rootstrap/eks-airflow/blob/main/airflow/chart/values.yaml) file.    
 
 
 
