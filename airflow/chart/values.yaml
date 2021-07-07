@@ -34,10 +34,10 @@ gid: 0
 airflowHome: /opt/airflow
 
 # Default airflow repository -- overrides all the specific images below
-defaultAirflowRepository: rootstrap/airflow
+defaultAirflowRepository: rootstrap/eks-airflow
 
 # Default airflow tag to deploy
-defaultAirflowTag: "2.1.0"
+defaultAirflowTag: "2.1.0b1"
 
 # Airflow version (Used to make some decisions based on Airflow Version being deployed)
 airflowVersion: "2.1.0"
@@ -370,14 +370,13 @@ workers:
     # Enable persistent volumes
     enabled: false
     # Volume size for worker StatefulSet
-    size: 100Gi
+    size: 5Gi
     # If using a custom storageClass, pass name ref to all statefulSets here
-    storageClassName:
+    storageClassName: "Retain"
     # Execute init container to chown log directory.
     # This is currently only needed in kind, due to usage
     # of local-path provisioner.
     fixPermissions: false
-
   kerberosSidecar:
     # Enable kerberos sidecar
     enabled: false
@@ -411,8 +410,7 @@ workers:
 
   # Mount additional volumes into worker.
   extraVolumes: []
-  extraVolumeMounts: []
-
+  extraVolumeMounts: [] 
   # Select certain nodes for airflow worker pods.
   nodeSelector: {}
   affinity: {}
@@ -981,7 +979,6 @@ dags:
     # If using a custom storageClass, pass name here
     storageClassName:
     # access mode of the persistent volume
-    accessMode: ReadWriteMany
     ## the name of an existing PVC to use
     existingClaim: ~
   gitSync:

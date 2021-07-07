@@ -26,6 +26,21 @@ This repo provides Terraform templates for deploying a Kubernetes cluster agains
 	terraform apply
 ```
 
+* Create Policy
+```
+https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html
+```
+
+* Upgrade Driver
+```
+helm upgrade -install aws-ebs-csi-driver aws-ebs-csi-driver/aws-ebs-csi-driver \
+  --namespace kube-system \
+  --set enableVolumeResizing=true \
+  --set enableVolumeSnapshot=true \
+  --set serviceAccount.controller.create=true \
+  --set serviceAccount.controller.name=ebs-csi-controller-sa
+```
+
 * Authenticate to Cluster
 ```
 aws eks update-kubeconfig --name sandbox-eks-cluster --region $AWS_DEFAULT_REGION
