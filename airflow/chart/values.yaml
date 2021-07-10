@@ -34,10 +34,10 @@ gid: 0
 airflowHome: /opt/airflow
 
 # Default airflow repository -- overrides all the specific images below
-defaultAirflowRepository: rootstrap/airflow
+defaultAirflowRepository: rootstrap/eks-airflow
 
 # Default airflow tag to deploy
-defaultAirflowTag: "2.1.0"
+defaultAirflowTag: "2.1.0b1"
 
 # Airflow version (Used to make some decisions based on Airflow Version being deployed)
 airflowVersion: "2.1.0"
@@ -1032,7 +1032,7 @@ dags:
     # If you are using an ssh private key, you can additionally
     # specify the content of your known_hosts file, example:
     #
-    knownHosts: /etc/git-secret/ssh/known_hosts
+    #knownHosts: /etc/git-secret/ssh/known_hosts
     # interval between git sync attempts in seconds
     wait: 60
     containerName: git-sync
