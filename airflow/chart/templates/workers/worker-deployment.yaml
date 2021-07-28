@@ -143,8 +143,6 @@ spec:
           volumeMounts:
             - mountPath: "/input"
               name: task-pv-storage
-            # - name: ebs-input
-            #   mountPath: /test-ebs
 {{- if .Values.workers.extraVolumeMounts }}
 {{ toYaml .Values.workers.extraVolumeMounts | indent 12 }}
 {{- end }}
@@ -242,11 +240,7 @@ spec:
       volumes:
         - name: task-pv-storage
           persistentVolumeClaim:
-            claimName: pv-claim
-        # - name: ebs-input
-        #  awsElasticBlockStore:
-        #    volumeID: "vol-078cb80096d1b0bdd"
-        #    fsType: ext4
+            claimName:  ebs-claim
 {{- if .Values.workers.extraVolumes }}
 {{ toYaml .Values.workers.extraVolumes | indent 8 }}
 {{- end }}
