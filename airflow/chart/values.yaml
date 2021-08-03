@@ -33,14 +33,13 @@ gid: 0
 # Used for mount paths
 airflowHome: /opt/airflow
 
-# Default airflow repository -- overrides all the specific images below
-defaultAirflowRepository: rootstrap/eks-airflow
+defaultAirflowRepository: apache/airflow
 
 # Default airflow tag to deploy
-defaultAirflowTag: "2.1.0b1"
+defaultAirflowTag: "2.1.2"
 
 # Airflow version (Used to make some decisions based on Airflow Version being deployed)
-airflowVersion: "2.1.0"
+airflowVersion: "2.1.2"
 
 # Images
 images:
@@ -370,14 +369,13 @@ workers:
     # Enable persistent volumes
     enabled: false
     # Volume size for worker StatefulSet
-    size: 100Gi
+    size: 5Gi
     # If using a custom storageClass, pass name ref to all statefulSets here
-    storageClassName:
+    storageClassName: "Retain"
     # Execute init container to chown log directory.
     # This is currently only needed in kind, due to usage
     # of local-path provisioner.
     fixPermissions: false
-
   kerberosSidecar:
     # Enable kerberos sidecar
     enabled: false
@@ -411,8 +409,7 @@ workers:
 
   # Mount additional volumes into worker.
   extraVolumes: []
-  extraVolumeMounts: []
-
+  extraVolumeMounts: [] 
   # Select certain nodes for airflow worker pods.
   nodeSelector: {}
   affinity: {}
@@ -981,7 +978,6 @@ dags:
     # If using a custom storageClass, pass name here
     storageClassName:
     # access mode of the persistent volume
-    accessMode: ReadWriteMany
     ## the name of an existing PVC to use
     existingClaim: ~
   gitSync:
@@ -990,9 +986,9 @@ dags:
     # ssh examples ssh://git@github.com/apache/airflow.git
     # git@github.com:apache/airflow.git
     # https example: https://github.com/apache/airflow.git
-    #repo: git@github.com:rootstrap/medical-pipeline.git
-    repo: https://github.com/rootstrap/medical-pipeline.git
-    branch: devel
+    repo: https://github.com/apache/airflow.git
+    branch: v2-1-stable
+
     rev: HEAD
     depth: 1
 
@@ -1000,7 +996,8 @@ dags:
     maxFailures: 5
     # subpath within the repo where dags are located
     # should be "" if dags are at repo root
-    subPath: "dags"
+    subPath: "tests/dags"
+
     # if your repo needs a user name password
     # you can load them to a k8s secret like the one below
     #   ---

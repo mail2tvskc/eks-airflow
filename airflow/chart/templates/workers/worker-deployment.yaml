@@ -141,6 +141,8 @@ spec:
             - name: worker-logs
               containerPort: {{ .Values.ports.workerLogs }}
           volumeMounts:
+            - mountPath: "/input"
+              name: task-pv-storage
 {{- if .Values.workers.extraVolumeMounts }}
 {{ toYaml .Values.workers.extraVolumeMounts | indent 12 }}
 {{- end }}
@@ -236,6 +238,9 @@ spec:
 {{- toYaml .Values.workers.extraContainers | nindent 8 }}
 {{- end }}
       volumes:
+        - name: task-pv-storage
+          persistentVolumeClaim:
+            claimName:  ebs-claim
 {{- if .Values.workers.extraVolumes }}
 {{ toYaml .Values.workers.extraVolumes | indent 8 }}
 {{- end }}
