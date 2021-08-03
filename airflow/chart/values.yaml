@@ -34,13 +34,13 @@ gid: 0
 airflowHome: /opt/airflow
 
 # Default airflow repository -- overrides all the specific images below
-defaultAirflowRepository: rootstrap/eks-airflow
+defaultAirflowRepository: apache/airflow
 
 # Default airflow tag to deploy
-defaultAirflowTag: "2.1.0b1"
+defaultAirflowTag: "2.1.2"
 
 # Airflow version (Used to make some decisions based on Airflow Version being deployed)
-airflowVersion: "2.1.0"
+airflowVersion: "2.1.2"
 
 # Images
 images:
@@ -987,9 +987,9 @@ dags:
     # ssh examples ssh://git@github.com/apache/airflow.git
     # git@github.com:apache/airflow.git
     # https example: https://github.com/apache/airflow.git
-    #repo: git@github.com:rootstrap/medical-pipeline.git
-    repo: https://github.com/rootstrap/medical-pipeline.git
-    branch: devel
+    repo: https://github.com/apache/airflow.git
+    branch: v2-1-stable
+
     rev: HEAD
     depth: 1
 
@@ -997,7 +997,8 @@ dags:
     maxFailures: 5
     # subpath within the repo where dags are located
     # should be "" if dags are at repo root
-    subPath: "dags"
+    subPath: "tests/dags"
+
     # if your repo needs a user name password
     # you can load them to a k8s secret like the one below
     #   ---
