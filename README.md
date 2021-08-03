@@ -2,22 +2,20 @@
 
 This repo provides Terraform templates for deploying a Kubernetes cluster against AWS using EKS
 
-## Requirements
+# Requirements
 
 * Terraform
 * AWS CLI
 * Kubectl
 
-## Usage
+# Usage with Terraform CLI
 
-* Make sure environment variables `AWS_PROFILE` and `AWS_DEFAULT_REGION` point to the corresponding AWS credentials/region
+Make sure environment variables `AWS_PROFILE` and `AWS_DEFAULT_REGION` point to the corresponding AWS credentials/region
 
 ```bash
   export AWS_PROFILE=sandbox 
   export AWS_DEFAULT_REGION=us-west-2
 ```
-
-### with Terraform CLI
 
 1. Review [terraform/variables.tf](terraform/variables.tf) and adjust as needed    
 2. Provision VPC and cluster
@@ -56,7 +54,7 @@ This repo provides Terraform templates for deploying a Kubernetes cluster agains
 		aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name sandbox-eks-cluster
 	```
 
-**Note**       
+## Note       
 This template does not currently include an Ingress controller. One can be deployed, eg for Nginx, using
 
 ```bash
@@ -67,7 +65,7 @@ This template does not currently include an Ingress controller. One can be deplo
 ```
 Notice that this is deployed outside of Terraform, so it needs to be manually deleted before removing the cluster.
 
-#### EBS CSI        
+### EBS CSI        
 The airflow chart provided is configured to use EBS CSI driver for worker's volume. You can install it following these [steps](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html). Here are provided for you: 
 
 Notice that the name for the cluster in this case is "sandbox-eks-cluster". 
@@ -136,7 +134,7 @@ helm upgrade -install aws-ebs-csi-driver aws-ebs-csi-driver/aws-ebs-csi-driver \
 > **Observation** maybe you already have named roles or policies with the provided names, in that case use other names, and make sure that you change then other steps, in order to attack correctly the role and policy. 
 
 
-#### Cleanup   
+## Cleanup   
 > **⚠ WARNING: You will delete your cluster with this steps.**  
 
 If you want to destroy the cluster execute:
@@ -156,18 +154,18 @@ If you want to delete the role and policies execute the following:
 		
 	```
 
-## Airflow
+# Airflow
 See [airflow/README.md](airflow/README.md) for information about how to install airflow in this cluster. 
 
 
-## Turn off EKS cluster
+# Turn off EKS cluster
 > **⚠ WARNING: Your cluster will be turned off if you follow this steps.**  
 
 If you want to turn off the instances go to Amazon's web console -> EC2 -> Autoscaling group and edit the configuration, setting up **0** instances for 'Desired capacity' and 'Minimum capacity' fields.     
 
 
 
-## References: 
+# References: 
 
 * [https://www.terraform.io/intro/index.html](https://www.terraform.io/intro/index.html)
 * [https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html)
