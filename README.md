@@ -133,12 +133,13 @@ helm upgrade -install aws-ebs-csi-driver aws-ebs-csi-driver/aws-ebs-csi-driver \
 --set serviceAccount.controller.name=ebs-csi-controller-sa
 ```
 
-**Observation** maybe you already have named roles or policies with the provided names, in that case use other names, and make sure that you change then other steps, in order to attack correctly the role and policy. 
+> **Observation** maybe you already have named roles or policies with the provided names, in that case use other names, and make sure that you change then other steps, in order to attack correctly the role and policy. 
 
 
 #### Cleanup   
+> **⚠ WARNING: You will delete your cluster with this steps.**  
+
 If you want to destroy the cluster execute:
-{: .alert .alert-danger}
 
 1. Delete role and policy
 If you want to delete the role and policies execute the following:      
@@ -160,8 +161,9 @@ See [airflow/README.md](airflow/README.md) for information about how to install 
 
 
 ## Turn off EKS cluster
-{: .alert .alert-danger}       
-If you want to turn off the instances go to Amazon's web console -> EC2 -> Autoscaling group and edit the configuration, setting up 0 instances for 'Desired capacity' and 'Minimum capacity' fields.     
+> **⚠ WARNING: Your cluster will be turned off if you follow this steps.**  
+
+If you want to turn off the instances go to Amazon's web console -> EC2 -> Autoscaling group and edit the configuration, setting up **0** instances for 'Desired capacity' and 'Minimum capacity' fields.     
 
 
 
