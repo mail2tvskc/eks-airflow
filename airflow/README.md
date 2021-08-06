@@ -79,7 +79,12 @@ Enter at Enter at [http://localhost:8080/](http://localhost:8080/)
 
 You will see the Airflow website, you can login with admin:admin.
 
-![Drag Racing](images/airflow-web.png)
+![AirflowWeb](images/airflow-web.png)
+
+You can execute the given example DAG  by pressing the button. And if you enter to the DAG, you will see the status for each task. 
+
+![AirflowDAG](images/Airflow-dag.png)
+
 
 **Access Flower web**
 
