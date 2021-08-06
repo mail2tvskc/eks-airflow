@@ -1,5 +1,9 @@
 *.DS_Store
 
+airflow/efs-service-account.yaml
+airflow/iam-policy-example.json 
+airflow/trust-policy.json 
+
 terraform/config_map_aws_auth.yml
 
 # Local .terraform directories
