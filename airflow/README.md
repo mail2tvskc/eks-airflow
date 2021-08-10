@@ -19,16 +19,50 @@ Installation is on a EKS Kubernetes Cluster.
 
 In order to install the Kubernetes cluster follow the steps with Terraform at the main [README.md](../README.md)
 
+### CSI Driver
+If you want to have a storage for the nodes, you can use a CSI Driver. In this repo, the configuration for EBS and EFS is provided. 
+You would have to choose one of them. Plus, configure the worker's deployment at [templates/workers/worker-deployment.yaml](templates/workers/worker-deployment.yaml) changing in these lines the claimName for the corresponding name:       
+
+```yaml
+ volumes:
+      - name: task-pv-storage
+        persistentVolumeClaim:
+          claimName:  efs-claim
+```
+
+If you want to disable it, just comment those lines and these other lines:     
+```yaml
+            - mountPath: "/input"
+              name: task-pv-storage
+```
+Note: with EFS CSI driver, you are able to set the accessMode as 'ReadWriteMany', which let the nodes to share the volume and read and write at the same time. 
+
+Once that you have choosen which CSI Driver to use (pre-provisioned-efs or pre-provisioned-ebs):
+
+1. Follow the steps provided in [pre-provisioned-ebs/README.md](pre-provisioned-ebs/README.md)  or [pre-provisioned-efs/README.md](pre-provisioned-efs/README.md) 
+
+2. Execute this command:   
+For EBS:     
+```bash
+kubectl apply -f pre-provisioned-ebs/ 
+```
+
+For EFS:     
+```bash
+kubectl apply -f pre-provisioned-efs/ 
+```
+
+
 ### Airflow
 
 Once Kubernetes cluster is created we are able to install airflow. 
 
 **Create airflow namesapce and set as default**     
 
-	```bash
-	  kubectl create namespace airflow
-	  kubectl config set-context --current --namespace=airflow
-	```
+```bash
+  kubectl create namespace airflow
+  kubectl config set-context --current --namespace=airflow
+```
 
 **Note:** The folder [chart](airflow/chart) has been downloaded from [airflow repository](https://github.com/airflow-helm/charts/tree/main/charts/airflow). The following steps has been executed: (if you use this chart you can skip these steps)    
 
