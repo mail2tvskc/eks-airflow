@@ -39,7 +39,7 @@ Note: with EFS CSI driver, you are able to set the accessMode as 'ReadWriteMany'
 
 Once that you have choosen which CSI Driver to use (pre-provisioned-efs or pre-provisioned-ebs):
 
-1. Follow the steps provided in [pre-provisioned-ebs/README.md](pre-provisioned-ebs/README.md)  or [pre-provisioned-efs/README.md](pre-provisioned-efs/README.md) 
+1. Follow the steps provided in [chart/pre-provisioned-ebs/README.md](chart/pre-provisioned-ebs/README.md)  or [chart/pre-provisioned-efs/README.md](chart/pre-provisioned-efs/README.md) 
 
 2. Execute this command:   
 For EBS:     
