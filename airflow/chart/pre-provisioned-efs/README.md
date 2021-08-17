@@ -98,9 +98,9 @@ aws efs create-mount-target --file-system-id FileSystemId --subnet-id $SubnetID 
 Enable DNS for the VPC
 You need to go to the AWS website at the VPCs configuration, edit it to enable DNS hostname, in this case the VPC is under the name 'sandbox-vpc'.
 
-Edit chart at [pre-provisioned-efs/pv.yaml](pre-provisioned-efs/pv.yaml) setting the volumeHandle value with the corresponding for the efs created. You can check it at the website. 
+Edit chart at [pv.yaml](pv.yaml) setting the volumeHandle value with the corresponding for the efs created. You can check it at the website. 
 
-![DNS](images/DNS.png)
+![DNS](../../images/DNS.png)
 
 > **⚠ WARNING: maybe you already have named roles or policies with the provided names, in that case use other names, and make sure that you change then other steps, in order to attack correctly the role and policy.** 
 
