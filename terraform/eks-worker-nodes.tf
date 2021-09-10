@@ -49,7 +49,7 @@ resource "aws_iam_instance_profile" "k8s-cluster-node" {
 resource "aws_security_group" "k8s-cluster-node" {
   name        = "terraform-eks-k8s-cluster-node"
   description = "Security group for all nodes in the cluster"
-  vpc_id      = aws_vpc.k8s-cluster.id
+  vpc_id      = var.vpc_id
 
   egress {
     from_port   = 0
@@ -126,8 +126,7 @@ resource "aws_autoscaling_group" "k8s-cluster" {
   health_check_grace_period = 60
   force_delete              = true
   name                 = "${var.env}-eks-cluster-asg"
-  vpc_zone_identifier  = aws_subnet.k8s-cluster.*.id
-
+  vpc_zone_identifier  = [var.subnet_1 , var.subnet_2]
   tag {
     key                 = "Name"
     value               = "${var.env}-eks-cluster-asg"

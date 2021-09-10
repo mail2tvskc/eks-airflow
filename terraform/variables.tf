@@ -7,6 +7,11 @@ variable "env" {
   type    = string
 }
 
+variable "vpc_id" { default = "vpc-0c088867" }
+variable "subnet_1" { default = "subnet-0425cbf9aa121e671" }
+variable "subnet_2" { default = "subnet-07accfda00d1f3be0" }
+
+
 variable "cluster_name" {
   default = "sandbox-eks-cluster"
   description = "Name of the EKS Cluster. This will be used to name auxilliary resources"

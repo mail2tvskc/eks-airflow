@@ -1,6 +1,6 @@
 resource "aws_security_group" "k8s-cluster-rds" {
   name = "${var.env}-rds-sg"
-  vpc_id = aws_vpc.k8s-cluster.id
+  vpc_id = var.vpc_id
   ingress {
       from_port   = 22
       to_port     = 22

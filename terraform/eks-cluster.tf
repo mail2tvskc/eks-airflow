@@ -36,7 +36,7 @@ resource "aws_iam_role_policy_attachment" "k8s-cluster-cluster-AmazonEKSServiceP
 resource "aws_security_group" "k8s-cluster-cluster" {
   name        = "${var.env}-eks-sg"
   description = "Cluster communication with worker nodes"
-  vpc_id      = aws_vpc.k8s-cluster.id
+  vpc_id      = var.vpc_id
 
   egress {
     from_port   = 0
@@ -76,7 +76,7 @@ resource "aws_eks_cluster" "k8s-cluster" {
 
   vpc_config {
     security_group_ids = [aws_security_group.k8s-cluster-cluster.id]
-    subnet_ids         = aws_subnet.k8s-cluster.*.id
+    subnet_ids         = [var.subnet_1 , var.subnet_2 ]
   }
 
   depends_on = [
